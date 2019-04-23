@@ -1,0 +1,26 @@
+<footer class="site-footer">
+	<div class="inner">
+
+		<div class="footer-links">
+			{{#if @blog.twitter}}
+			<a href="{{twitter_url}}" class="square fill-horizontal" target="_blank" rel="noopener"><span class="icon-twitter" aria-hidden="true"></span><span class="screen-reader-text">Twitter</span></a>
+			{{/if}}
+			{{#if @blog.facebook}}
+			<a href="{{facebook_url}}" class="square fill-horizontal" target="_blank" rel="noopener"><span class="icon-facebook" aria-hidden="true"></span><span class="screen-reader-text">Facebook</span></a>
+			{{/if}}
+			<a href="#" class="square fill-horizontal" target="_blank" rel="noopener"><span class="icon-github" aria-hidden="true"></span><span class="screen-reader-text">GitHub</span></a>
+			<a href="#" class="square fill-horizontal" target="_blank" rel="noopener"><span class="icon-codepen" aria-hidden="true"></span><span class="screen-reader-text">CodePen</span></a>
+			<a href="#" class="square fill-horizontal" target="_blank" rel="noopener"><span class="icon-dribbble" aria-hidden="true"></span><span class="screen-reader-text">Dribbble</span></a>
+			<a href="#" class="square fill-horizontal" target="_blank" rel="noopener"><span class="icon-medium" aria-hidden="true"></span><span class="screen-reader-text">Medium</span></a>
+			<a href="#" class="square fill-horizontal" target="_blank" rel="noopener"><span class="icon-instagram" aria-hidden="true"></span><span class="screen-reader-text">Instagram</span></a>
+			<a href="#" class="square fill-horizontal" target="_blank" rel="noopener"><span class="icon-pinterest" aria-hidden="true"></span><span class="screen-reader-text">Pinterest</span></a>
+			<a href="{{@blog.url}}/rss/" class="square fill-horizontal" target="_blank" rel="noopener"><span class="icon-feed" aria-hidden="true"></span><span class="screen-reader-text">RSS</span></a>
+		</div><!-- .footer-links -->
+
+		<div class="site-info">
+			<a href="{{@blog.url}}">{{@blog.title}}</a> &copy; {{date format="YYYY"}}
+			<a href="#page" class="top-link square fill-horizontal"><span class="icon-chevron-up" aria-hidden="true"></span><span class="screen-reader-text">{{t "Back to the top"}}</span></a>
+		</div><!-- .site-info -->
+
+	</div><!-- .inner -->
+</footer><!-- .site-footer -->

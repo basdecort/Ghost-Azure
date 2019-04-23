@@ -1,0 +1,121 @@
+{{!< default}}
+{{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
+
+<main class="site-main">
+	<div class="inner">
+
+		<div class="site-content fadeInDown delay_075s">
+			{{!-- Everything inside the #post tags pulls data from the page --}}
+			{{#post}}
+			<article class="{{post_class}}">
+				<header class="entry-header">
+					<div class="entry-header-wrap">
+						{{#if feature_image}}
+						<div class="post-thumbnail"><img srcset="{{img_url feature_image size="xs"}} 300w, {{img_url feature_image size="s"}} 480w, {{img_url feature_image size="m"}} 600w, {{img_url feature_image size="l"}} 900w, {{img_url feature_image size="xl"}} 1800w" sizes="(max-width: 930px) calc(100vw - 30px), (max-width: 1230px) calc(75vw - 22px), 900px" src="{{img_url feature_image size="l"}}" alt="{{title}}" /></div>
+						{{/if}}
+						<h1 class="entry-title">{{title}}</h1>
+					</div>
+					<div class="entry-meta">
+						{{#if featured}}<span class="featured-post icon-star" aria-hidden="true"></span>{{/if}}
+						<span class="post-author">{{authors}}</span> / <time class="published" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMMM DD, YYYY"}}</time>
+					</div><!-- .entry-meta -->
+				</header><!-- .entry-header -->
+				<div class="entry-content">
+					{{content}}
+				</div><!-- .entry-content -->
+				<footer class="entry-footer">
+					<div class="share-post">
+						<span>{{t "Share"}}</span>
+						<a class="fill-horizontal" target="_blank" href="https://twitter.com/intent/tweet?text={{encode title}}&amp;url={{url absolute="true"}}" rel="noopener"><span class="icon-twitter" aria-hidden="true"></span><span class="screen-reader-text">Twitter</span></a>
+						<a class="fill-horizontal" target="_blank" href="https://www.facebook.com/sharer.php?u={{url absolute="true"}}" rel="noopener"><span class="icon-facebook" aria-hidden="true"></span><span class="screen-reader-text">Facebook</span></a>
+						<a class="fill-horizontal" target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{url absolute="true"}}&amp;title={{encode title}}&amp;source={{encode @blog.title}}" rel="noopener"><span class="icon-linkedin" aria-hidden="true"></span><span class="screen-reader-text">LinkedIn</span></a>
+					</div>
+					{{#if tags}}
+					<div class="tag-links">{{t "Tags:"}} {{tags separator=""}}</div>
+					{{/if}}
+				</footer><!-- .entry-footer -->
+			</article><!-- .post -->
+
+			{{#primary_author}}
+			<div class="author-box">
+				<div class="author-info">
+					{{#if profile_image}}
+					<div class="author-image">
+						<a class="author-avatar" href="{{@blog.url}}/author/{{slug}}"><img src="{{img_url profile_image size="xxs"}}" alt="{{name}}" /></a>
+					</div>
+					{{/if}}
+					<div class="author-details">
+						<h2 class="author-title">{{{t "About <a href='{url}'>{name}</a>" url=(url) name=name}}}</h2>
+						{{#if bio}}
+						<p class="author-bio">{{bio}}</p>
+						{{/if}}
+						<p class="author-links">
+							{{#if location}}
+							<span class="author-location"><span class="icon-map-marker" aria-hidden="true"></span> {{location}}</span>
+							{{/if}}
+							{{#if website}}
+							<span class="author-website"><span class="icon-chain" aria-hidden="true"></span> <a href="{{website}}" target="_blank" rel="noopener">{{website}}</a></span>
+							{{/if}}
+							{{#if facebook}}
+							<span class="author-facebook"><span class="icon-facebook" aria-hidden="true"></span> <a href="{{facebook_url}}" target="_blank" rel="noopener">Facebook</a></span>
+							{{/if}}
+							{{#if twitter}}
+							<span class="author-twitter"><span class="icon-twitter" aria-hidden="true"></span> <a href="{{twitter_url}}" target="_blank" rel="noopener">Twitter</a></span>
+							{{/if}}
+						</p>
+					</div>
+				</div><!-- .author-info -->
+			</div><!-- .author-box -->
+			{{/primary_author}}
+
+			{{!-- Email subscribe form --}}
+			{{#if @labs.subscribers}}
+			<div class="subscribe-box">
+				<div class="subscribe-inside">
+					<h2 class="subscribe-box-title">{{t "Subscribe to {blogtitle}" blogtitle=@blog.title}}</h2>
+					<p>{{t "Get the latest posts delivered right to your inbox."}}</p>
+					{{subscribe_form form_class="gh-subscribe-form" placeholder=(t "Your email address")}}
+				</div>
+			</div>
+			{{/if}}
+
+			{{!-- Previous/next post links --}}
+			<nav class="post-navigation">
+				<h2 class="screen-reader-text">{{t "Post navigation"}}</h2>
+				{{#next_post}}
+				<div class="nav-next">
+					<div class="nav-inside">
+						{{#if feature_image}}
+						<a href="{{url}}" class="nav-thumb"><img srcset="{{img_url feature_image size="xs"}} 300w, {{img_url feature_image size="s"}} 480w" sizes="(max-width: 480px) 300px, 480px" src="{{img_url feature_image size="s"}}" alt="{{t "Next Post Preview"}}" /></a>
+						{{/if}}
+						<div class="nav-before">{{t "Next"}}</div>
+						<h3 class="nav-title"><a href="{{url}}">{{title}}</a></h3>
+						<div class="nav-date">{{date format="MMMM DD, YYYY"}}</div>
+					</div>
+				</div>
+				{{/next_post}}
+				{{#prev_post}}
+				<div class="nav-previous">
+					<div class="nav-inside">
+						{{#if feature_image}}
+						<a href="{{url}}" class="nav-thumb"><img srcset="{{img_url feature_image size="xs"}} 300w, {{img_url feature_image size="s"}} 480w" sizes="(max-width: 480px) 300px, 480px" src="{{img_url feature_image size="s"}}" alt="{{t "Previous Post Preview"}}" /></a>
+						{{/if}}
+						<div class="nav-before">{{t "Previous"}}</div>
+						<h3 class="nav-title"><a href="{{url}}">{{title}}</a></h3>
+						<div class="nav-date">{{date format="MMMM DD, YYYY"}}</div>
+					</div>
+				</div>
+				{{/prev_post}}
+			</nav><!-- .post-navigation -->
+
+			{{!-- The tag below includes the theme comments - partials/comments.hbs --}}
+			{{> comments}}
+			
+			{{/post}}
+		</div><!-- .site-content -->
+
+		{{!-- The tag below includes the theme sidebar - partials/sidebar.hbs --}}
+		{{> sidebar}}
+
+	</div><!-- .inner -->
+</main><!-- .site-main -->

@@ -1,0 +1,46 @@
+<aside class="sidebar fadeInDown delay_1s">
+
+	{{!-- Email subscribe form --}}
+	{{#if @labs.subscribers}}
+	<section class="widget widget-subscribe">
+		<h2 class="widget-title">{{t "{blogtitle} Newsletter" blogtitle=@blog.title}}</h2>
+		<p>{{t "Enter your email address to subscribe to this blog and receive notifications of new posts by email."}}</p>
+		{{subscribe_form form_class="gh-subscribe-form" placeholder=(t "Your email address")}}
+	</section><!-- .widget -->
+	{{/if}}
+
+	<section class="widget widget-text">
+		<h2 class="widget-title">{{t "About {blogtitle}" blogtitle=@blog.title}}</h2>
+		<p>I'm a software developer from The Netherlands with a passion for mobile and innovative technology.
+
+This blog will mostly cover mobile technology, especially Xamarin. I might divagate when I bump into other cool stuff.</p>
+	</section><!-- .widget -->
+
+	<section class="widget widget-text">
+		<p><a href="https://www.planetxamarin.com/"><img src="https://basdecort.files.wordpress.com/2017/08/planetxamarin-featured-badge.png" alt="Banner Ad" /></a></p>
+	</section><!-- .widget -->
+
+	<section class="widget widget-recent-posts">
+		<h2 class="widget-title">{{t "Latest Posts"}}</h2>
+		{{#get "posts" limit="3"}}
+		<ul>
+			{{#foreach posts}}
+			<li>
+				<div class="post-title"><a href="{{url}}">{{title}}</a></div>
+				<div class="post-date">{{date format="MMMM DD, YYYY"}}</div>
+			</li>
+			{{/foreach}}
+		</ul>
+		{{/get}}
+	</section><!-- .widget -->
+
+	<section class="widget widget-tags">
+		<h2 class="widget-title">{{t "Tags"}}</h2>
+		<div class="tagcloud">
+			{{#get "tags" limit="all" order="name asc"}}
+				{{tags separator=""}}
+			{{/get}}
+		</div>
+	</section><!-- .widget -->
+
+</aside><!-- .sidebar -->

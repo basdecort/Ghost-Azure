@@ -1,0 +1,29 @@
+{{!-- This is the post loop - each post will be output using this markup --}}
+{{#foreach posts}}
+	<article class="{{post_class}}">
+		<header class="entry-header">
+			<div class="entry-header-wrap">
+				{{#if feature_image}}
+				<a href="{{url}}" class="post-thumbnail"><img srcset="{{img_url feature_image size="xs"}} 300w, {{img_url feature_image size="s"}} 480w, {{img_url feature_image size="m"}} 600w, {{img_url feature_image size="l"}} 900w, {{img_url feature_image size="xl"}} 1800w" sizes="(max-width: 930px) calc(100vw - 30px), (max-width: 1230px) calc(75vw - 22px), 900px" src="{{img_url feature_image size="l"}}" alt="{{title}}" /></a>
+				{{/if}}
+				<h2 class="entry-title"><a href="{{url}}" rel="bookmark">{{title}}</a></h2>
+			</div>
+			<div class="entry-meta">
+				{{#if featured}}<span class="featured-post icon-star" aria-hidden="true"></span>{{/if}}
+				<span class="post-author">{{authors}}</span> / <time class="published" datetime="{{date format='YYYY-MM-DD'}}">{{date format="MMMM DD, YYYY"}}</time>
+			</div><!-- .entry-meta -->
+		</header><!-- .entry-header -->
+		<div class="entry-content">
+			<p>{{excerpt words="100"}}&hellip;</p>
+			<p class="read-more"><a class="more-link" href="{{url}}">{{t "Read More"}}</a></p>
+		</div><!-- .entry-content -->
+		{{#if tags}}
+		<footer class="entry-footer">
+			<div class="tag-links">{{t "Tags:"}} {{tags separator=""}}</div>
+		</footer><!-- .entry-footer -->
+		{{/if}}
+	</article><!-- .post -->
+{{/foreach}}
+
+{{!-- Previous/next page links - displayed on every page --}}
+{{pagination}}

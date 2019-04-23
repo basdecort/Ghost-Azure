@@ -1,0 +1,52 @@
+{{!< default}}
+{{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
+
+{{!-- The main content area on the author page --}}
+<main class="site-main">
+	<div class="inner">
+
+		<div class="site-content fadeInDown delay_075s">
+			{{!-- Everything inside the #author tags pulls data from the author --}}
+			{{#author}}
+			<header class="page-header">
+				<div class="author-box">
+					<div class="author-info">
+						{{#if profile_image}}
+						<div class="author-image">
+							<div class="author-avatar"><img src="{{img_url profile_image size="xxs"}}" alt="{{name}}" /></div>
+						</div>
+						{{/if}}
+						<div class="author-details">
+							<h1 class="author-title">{{t "About {name}" name=name}}</h1>
+							{{#if bio}}
+							<p class="author-bio">{{bio}}</p>
+							{{/if}}
+							<p class="author-links">
+								<span class="author-stats"><span class="icon-bar-chart" aria-hidden="true"></span> {{plural ../pagination.total empty=(t "No posts") singular=(t "% post") plural=(t "% posts")}}</span>
+								{{#if location}}
+								<span class="author-location"><span class="icon-map-marker" aria-hidden="true"></span> {{location}}</span>
+								{{/if}}
+								{{#if website}}
+								<span class="author-website"><span class="icon-chain" aria-hidden="true"></span> <a href="{{website}}" target="_blank" rel="noopener">{{website}}</a></span>
+								{{/if}}
+								{{#if facebook}}
+								<span class="author-facebook"><span class="icon-facebook" aria-hidden="true"></span> <a href="{{facebook_url}}" target="_blank" rel="noopener">Facebook</a></span>
+								{{/if}}
+								{{#if twitter}}
+								<span class="author-twitter"><span class="icon-twitter" aria-hidden="true"></span> <a href="{{twitter_url}}" target="_blank" rel="noopener">Twitter</a></span>
+								{{/if}}
+							</p>
+						</div>
+					</div><!-- .author-info -->
+				</div><!-- .author-box -->
+			</header><!-- .page-header -->
+			{{/author}}
+			{{!-- The tag below includes the post loop - partials/loop.hbs --}}
+			{{> "loop"}}
+		</div><!-- .site-content -->
+
+		{{!-- The tag below includes the theme sidebar - partials/sidebar.hbs --}}
+		{{> sidebar}}
+
+	</div><!-- .inner -->
+</main><!-- .site-main -->

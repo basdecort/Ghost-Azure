@@ -1,0 +1,46 @@
+{
+  "name": "bloginn",
+  "description": "Bold theme for Ghost.",
+  "version": "1.5.0",
+  "engines": {
+    "ghost": ">=2.11.0",
+    "ghost-api": "v2"
+  },
+  "screenshots": {
+    "desktop": "assets/screenshot-desktop.jpg",
+    "mobile": "assets/screenshot-mobile.jpg"
+  },
+  "author": {
+    "name": "Just Good Themes",
+    "email": "hello@justgoodthemes.com",
+    "url": "https://justgoodthemes.com"
+  },
+  "keywords": [
+    "ghost",
+    "theme",
+    "ghost-theme"
+  ],
+  "config": {
+    "posts_per_page": 8,
+    "image_sizes": {
+      "xxs": {
+        "width": 150
+      },
+      "xs": {
+        "width": 300
+      },
+      "s": {
+        "width": 480
+      },
+      "m": {
+        "width": 600
+      },
+      "l": {
+        "width": 900
+      },
+      "xl": {
+        "width": 1800
+      }
+    }
+  }
+}

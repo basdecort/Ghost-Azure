@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+	{{!-- Document Settings --}}
+	<meta charset="utf-8">
+
+	{{!-- Page Meta --}}
+	<title>{{code}} — {{message}}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	{{!-- Styles --}}
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:400,400italic,700,700italic" />
+	<link rel="stylesheet" type="text/css" href="{{asset "css/style.css"}}" />
+</head>
+<body class="{{body_class}} error-404">
+	<div id="page" class="site">
+		<header class="site-header fadeInDown delay_05s">
+			<div class="inner">
+				{{#if @blog.logo}}
+				<p class="site-logo"><a href="{{@blog.url}}"><img src="{{img_url @blog.logo size="xs"}}" alt="{{@blog.title}}" /></a></p>
+				{{/if}}
+				<p class="site-title"><a href="{{@blog.url}}">{{@blog.title}}</a></p>
+				{{#if @blog.description}}
+				<p class="site-description">{{@blog.description}}</p>
+				{{/if}}
+			</div><!-- .inner -->
+		</header><!-- .site-header -->
+		<main class="site-main">
+			<section class="inner">
+				<div class="site-content fadeInDown delay_075s">
+					<div class="not-found">
+						<header class="entry-header">
+							<div class="entry-header-wrap">
+								{{#if @blog.cover_image}}
+								<div class="post-thumbnail"><img srcset="{{img_url @blog.cover_image size="xs"}} 300w, {{img_url @blog.cover_image size="s"}} 480w, {{img_url @blog.cover_image size="m"}} 600w, {{img_url @blog.cover_image size="l"}} 900w, {{img_url @blog.cover_image size="xl"}} 1800w" sizes="(max-width: 930px) calc(100vw - 30px), (max-width: 1230px) calc(75vw - 22px), 900px" src="{{img_url @blog.cover_image size="l"}}" alt="{{code}}" /></div>
+								{{/if}}
+								<h1 class="entry-title">{{code}}</h1>
+							</div>
+						</header><!-- .entry-header -->
+						<div class="entry-content">
+							<p>{{message}} <br /><a class="error-link" href="{{@blog.url}}">{{{t "Go to the front page &rarr;"}}}</a></p>
+						</div><!-- .entry-content -->
+					</div><!-- .not-found -->
+				</div><!-- .site-content -->
+			</section><!-- .inner -->
+		</main><!-- .site-main -->
+	</div><!-- #page -->
+</body>
+</html>
