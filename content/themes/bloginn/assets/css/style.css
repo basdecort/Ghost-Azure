@@ -1960,22 +1960,26 @@ pre:before,
 	.nav-title {
 		font-size: 18px;
 	}
+	
 	.site-logo
 	{
 		float: none;
 		margin: auto;
 		width: 50%;
 	}
+
 	.site-description
 	{
 		display: none;
 	}
+
 	#menu-toggle
 	{
 		float: none;
 		margin-left: auto;
 		margin-right: auto;
 	}
+
 	.subscribe-button
 	{
 		display: none;
