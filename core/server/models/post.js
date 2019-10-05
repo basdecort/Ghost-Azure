@@ -350,7 +350,7 @@ Post = ghostBookshelf.Model.extend({
             } catch (err) {
                 throw new common.errors.ValidationError({
                     message: 'Invalid mobiledoc structure.',
-                    help: 'https://docs.ghost.org/concepts/posts/'
+                    help: 'https://ghost.org/docs/concepts/posts/'
                 });
             }
         }
@@ -659,7 +659,7 @@ Post = ghostBookshelf.Model.extend({
         return {
             event: event,
             resource_id: this.id || this.previous('id'),
-            resource_type: this.tableName.replace(/s$/, ''),
+            resource_type: 'post',
             actor_id: actor.id,
             actor_type: actor.type
         };

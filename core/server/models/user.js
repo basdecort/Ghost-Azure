@@ -322,6 +322,24 @@ User = ghostBookshelf.Model.extend({
         delete options.status;
 
         return filter;
+    },
+
+    getAction(event, options) {
+        const actor = this.getActor(options);
+
+        // @NOTE: we ignore internal updates (`options.context.internal`) for now
+        if (!actor) {
+            return;
+        }
+
+        // @TODO: implement context
+        return {
+            event: event,
+            resource_id: this.id || this.previous('id'),
+            resource_type: 'user',
+            actor_id: actor.id,
+            actor_type: actor.type
+        };
     }
 }, {
     orderDefaultOptions: function orderDefaultOptions() {
@@ -894,20 +912,20 @@ User = ghostBookshelf.Model.extend({
     },
 
     transferOwnership: function transferOwnership(object, unfilteredOptions) {
-        var options = ghostBookshelf.Model.filterOptions(unfilteredOptions, 'transferOwnership'),
-            ownerRole,
-            contextUser;
+        const options = ghostBookshelf.Model.filterOptions(unfilteredOptions, 'transferOwnership');
+        let ownerRole;
+        let contextUser;
 
         return Promise.join(
             ghostBookshelf.model('Role').findOne({name: 'Owner'}),
             User.findOne({id: options.context.user}, {withRelated: ['roles']})
         )
-            .then(function then(results) {
+            .then((results) => {
                 ownerRole = results[0];
                 contextUser = results[1];
 
                 // check if user has the owner role
-                var currentRoles = contextUser.toJSON(options).roles;
+                const currentRoles = contextUser.toJSON(options).roles;
                 if (!_.some(currentRoles, {id: ownerRole.id})) {
                     return Promise.reject(new common.errors.NoPermissionError({
                         message: common.i18n.t('errors.models.user.onlyOwnerCanTransferOwnerRole')
@@ -917,7 +935,7 @@ User = ghostBookshelf.Model.extend({
                 return Promise.join(ghostBookshelf.model('Role').findOne({name: 'Administrator'}),
                     User.findOne({id: object.id}, {withRelated: ['roles']}));
             })
-            .then(function then(results) {
+            .then((results) => {
                 const adminRole = results[0];
                 const user = results[1];
 
@@ -927,11 +945,17 @@ User = ghostBookshelf.Model.extend({
                     }));
                 }
 
-                const currentRoles = user.toJSON(options).roles;
+                const {roles: currentRoles, status} = user.toJSON(options);
 
                 if (!_.some(currentRoles, {id: adminRole.id})) {
                     return Promise.reject(new common.errors.ValidationError({
                         message: common.i18n.t('errors.models.user.onlyAdmCanBeAssignedOwnerRole')
+                    }));
+                }
+
+                if (status !== 'active') {
+                    return Promise.reject(new common.errors.ValidationError({
+                        message: common.i18n.t('errors.models.user.onlyActiveAdmCanBeAssignedOwnerRole')
                     }));
                 }
 
@@ -940,7 +964,7 @@ User = ghostBookshelf.Model.extend({
                     user.roles().updatePivot({role_id: ownerRole.id}),
                     user.id);
             })
-            .then(function then(results) {
+            .then((results) => {
                 return Users.forge()
                     .query('whereIn', 'id', [contextUser.id, results[2]])
                     .fetch({withRelated: ['roles']});
