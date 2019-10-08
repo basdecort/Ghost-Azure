@@ -245,6 +245,8 @@ abbr[title] {
 b,
 strong {
 	font-weight: bold;
+	font-size: 110%;
+    color: #5d5b5b;
 }
 
 dfn {
